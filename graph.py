@@ -2,6 +2,13 @@
 """Implementation of a data structure to hold a directed graph"""
 
 def aMatrixToGraph(aM):
+    """
+    Function that takes an adjancecy matrix and converts it to a graph.
+    >>> aMatrixToGraph([[0]])
+    Graph([Vertex(1)],[])
+    >>> aMatrixToGraph([[0,1],[1,0]])
+    Graph([Vertex(1), Vertex(2)],[Edge(Vertex(1),Vertex(2),1), Edge(Vertex(2),Vertex(1),1)])
+    """
     v = []
     e = []
     n = len(aM)
@@ -16,6 +23,10 @@ def aMatrixToGraph(aM):
     return Graph(v,e)
         
 class Vertex(object):
+    """
+    Class that is used to define vertices of graphs. Only distinguishing
+    property of vertices is their name.
+    """
     __slots__ = ['_name']
 
     def __init__(self,name):
@@ -32,6 +43,12 @@ class Vertex(object):
         return 'Vertex({})'.format(self.name)
 
 class Edge(object):
+    """
+    Class used to define the Edges of graphs. Each edge is directed and
+    potentially weighted. The edge goes from the first vertex to the second
+    vertex.
+    Edges are initialized with a weight of 1 if no weight is given.
+    """
     __slots__ = ['_vtup','_weight']
 
     def __init__(self,v1,v2,weight = 1):
@@ -50,11 +67,16 @@ class Edge(object):
     def v2(self):
         return self._vtup[1]
 
-    def flip(self):
-        return Edge(self.v2,self.v1,self.weight)
-
-    def adjustWeight(self,w):
+    @weight.setter
+    def weight(self,w):
         self._weight = w
+
+    def flip(self):
+        """
+        Given an edge, flip make the edge going in the opposite direction with
+        the same weight.
+        """
+        return Edge(self.v2,self.v1,self.weight)
 
     def __eq__(self,other):
         return (self.v1 == other.v1) and (self.v2 == other.v2) and (self.weight == other.weight)
@@ -148,3 +170,7 @@ class UnDigraph(Graph):
 
     def __repr__(self):
         return 'UnDigraph({!r},{!r})'.format(self.vlist,self.elist)
+
+if __name__ == '__main__':
+    from doctest import testmod
+    testmod()
