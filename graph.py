@@ -90,6 +90,10 @@ class Edge(object):
 
 
 class Graph(object):
+    """
+    Data structure to hold a mathematical Graph. Takes a list of vertices and
+    a list of edges.
+    """
     __slots__ = ['_vlist','_elist']
 
     def __init__(self,vlist,elist):
@@ -105,6 +109,11 @@ class Graph(object):
         return self._elist
     
     def aMatrix(self):
+        """
+        Creates the adjacency matrix of a graph. The matrix with 1 in the i,j
+        position if there is an edge going from the ith vertex to the 
+        jth vertex.
+        """
         aMatrix = []
         n = len(self.vlist)
         for _ in range(n):
@@ -116,6 +125,11 @@ class Graph(object):
         return aMatrix
 
     def removeVertex(self,v):
+        """
+        Removes a given vertex from a graph, this also removes the edges
+        connected to that vertex and renumbers the vertices so there
+        isn't a gap.
+        """
         g = self.aMatrix()
         j = v.name
         del g[j]
@@ -131,6 +145,11 @@ class Graph(object):
         return 'Graph({!r},{!r})'.format(self.vlist,self.elist)
 
 class UnDigraph(Graph):
+    """
+    Class that extends graph but is meant specifically for undirected graphs.
+    If given a nonsymmetric edge list, it will add the edges necessary for it
+    to be symmetric.
+    """
     __slots__ = ['_vlist','_elist']
 
     def __init__(self,vlist,elist):
@@ -144,6 +163,11 @@ class UnDigraph(Graph):
         return super().aMatrix()
 
     def dMatrix(self):
+        """
+        Return the degree Matrix of a graph. That is a matrix with the number
+        of edges connected to Vertex i as the i,ith entry of the matrix and 
+        0 everywhere else.
+        """
         dMatrix = []
         n = len(self.vlist)
         for _ in range(n):
@@ -157,6 +181,10 @@ class UnDigraph(Graph):
         return dMatrix
 
     def lMatrix(self):
+        """
+        Returns the laplacian matrix of a graph. That is the degree matrix
+        minus the adjacency matrix.
+        """
         lMatrix = []
         dMatrix = self.dMatrix()
         aMatrix = self.aMatrix()
