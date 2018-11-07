@@ -89,10 +89,10 @@ class Edge(object):
 
 
 
-class Graph(object):
+class Digraph(object):
     """
-    Data structure to hold a mathematical Graph. Takes a list of vertices and
-    a list of edges.
+    Data structure to hold a mathematical directed Graph. Takes a list of
+    vertices and a list of edges.
     """
     __slots__ = ['_vlist','_elist']
 
@@ -179,7 +179,7 @@ class Graph(object):
     def __repr__(self):
         return 'Graph({!r},{!r})'.format(self.vlist,self.elist)
 
-class UnDigraph(Graph):
+class Graph(Digraph):
     """
     Class that extends graph but is meant specifically for undirected graphs.
     If given a nonsymmetric edge list, it will add the edges necessary for it
