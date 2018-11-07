@@ -12,7 +12,7 @@ def aMatrixToGraph(aM):
     v = []
     e = []
     n = len(aM)
-    a = list(aM)
+    a = [l.copy() for l in aM]
     for i in range(n):
         v.append(Vertex(i+1))
     for i in range(n):
