@@ -71,7 +71,7 @@ class Edge(object):
     def weight(self,w):
         self._weight = w
 
-    def flip(self):
+    def _flip(self):
         """
         Given an edge, flip make the edge going in the opposite direction with
         the same weight.
@@ -86,8 +86,6 @@ class Edge(object):
 
     def __repr__(self):
         return 'Edge({!r},{!r},{})'.format(self.v1,self.v2,self.weight)
-
-
 
 class Digraph(object):
     """
@@ -177,7 +175,7 @@ class Digraph(object):
         return '({!s},{!s})'.format(self.vlist,self.elist)
 
     def __repr__(self):
-        return 'Graph({!r},{!r})'.format(self.vlist,self.elist)
+        return 'Digraph({!r},{!r})'.format(self.vlist,self.elist)
 
 class Graph(Digraph):
     """
@@ -190,8 +188,8 @@ class Graph(Digraph):
     def __init__(self,vlist,elist):
         f = elist.copy()
         for e in f:
-            if e.flip() not in f:
-                f.append(e.flip())
+            if e._flip() not in f:
+                f.append(e._flip())
         super().__init__(vlist,f)
 
     def aMatrix(self):
@@ -232,7 +230,20 @@ class Graph(Digraph):
         return '({!s},{!s})'.format(self.vlist,self.elist)
 
     def __repr__(self):
-        return 'UnDigraph({!r},{!r})'.format(self.vlist,self.elist)
+        return 'Graph({!r},{!r})'.format(self.vlist,self.elist)
+
+class CompleteGraph(Graph):
+    def __init__(self,n):
+        vlist = []
+        elist = []
+        for v in range(n):
+            vlist.append(Vertex(v+1))
+        for i in range(n):
+            for j in range(i):
+                elist.append(Edge(Vertex(i),Vertex(j)))
+                elist.append(Edge(Vertex(j),Vertex(i)))
+        self._vlist = vlist
+        self._elist = elist
 
 if __name__ == '__main__':
     from doctest import testmod
