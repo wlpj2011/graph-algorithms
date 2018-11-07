@@ -141,23 +141,16 @@ class Graph(object):
         return list(neighbors)
 
     def addEdge(self,e):
-        """Add an edge e to the graph"""
-        self.elist.append(e)
-        
-    def removeEdge(self,e):
-        """Remove an edge e from the graph"""
-        self.elist.remove(e)
+        pass
 
-    def addVertex(self):
-        """Adds a vertex to the graph with no connections"""
-        n = len(self.vlist)
-        self.vlist.append(Vertex(n+1))
+    def removeEdge(self,e):
+        pass
+
+    def addVertex(self,v):
+        pass
     
     def setEdgeWeight(self,e,w):
-        """Sets the edgeweight of an edge"""
-        self.elist.remove(e)
-        e.weight(w)
-        self.elist.append(e)
+        pass
 
     def removeVertex(self,v):
         """
