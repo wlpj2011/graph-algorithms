@@ -124,6 +124,34 @@ class Graph(object):
             aMatrix[i-1][j-1] += 1
         return aMatrix
 
+    def isAdjacent(self,v1,v2):
+        """
+        Returns true if there is an edge going from v1 to v2.
+        """
+        return Edge(v1,v2) in self.elist
+
+    def neighbors(self,v1):
+        """
+        Returns a list of the neighbors of a given vertex of a digraph.
+        """
+        neighbors = {}
+        for e in self.elist:
+            if v1 == e.v1:
+                neighbors.add(e.v2)
+        return list(neighbors)
+
+    def addEdge(self,e):
+        pass
+
+    def removeEdge(self,e):
+        pass
+
+    def addVertex(self,v):
+        pass
+    
+    def setEdgeWeight(self,e,w):
+        pass
+
     def removeVertex(self,v):
         """
         Removes a given vertex from a graph, this also removes the edges
