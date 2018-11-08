@@ -5,9 +5,12 @@ Repository meant to contain graph data structures and algorithms. Contains
 Vertex, Edge, Graph, and UnDigraph classes with the associated methods and
 properties.
 
+external methods:
+	aMatrixToGraph
+
 Vertex:
 	properties:
-		name
+		data
 	methods:
 		__init__
 		__str__
@@ -26,27 +29,57 @@ Edge:
 		__str__
 		__repr__
 
-Graph:
+Digraph:
 	properties:
 		vlist
 		elist
 	methods:
 		__init__
 		aMatrix
+		is adjacent
+		neighbors
+		addEdge
+		removeEdge
+		addVertex
+		setEdgeWeight
 		removeVertex
 		__str__
 		__repr__
 
-UnDigraph extends Graph:
+Graph extends Digaph:
 	properties:
 		vlist
 		elist
 	methods:
 		__init__
+		is adjacent
+		neighbors
+		addEdge
+		removeEdge
+		addVertex
 		removeVertex
+		setEdgeWeight
 		aMatrix
 		dMatrix
 		lMatrix
 		__str__
 		__repr__
-		
+
+CompleteGraph extends Graph:
+	properties:
+		vlist
+		elist
+	methods:
+		__init__
+		is adjacent
+		neighbors
+		addEdge
+		removeEdge
+		addVertex
+		removeVertex
+		setEdgeWeight
+		aMatrix
+		dMatrix
+		lMatrix
+		__str__
+		__repr__
