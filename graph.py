@@ -27,20 +27,20 @@ class Vertex(object):
     Class that is used to define vertices of graphs. Only distinguishing
     property of vertices is their name.
     """
-    __slots__ = ['_name']
+    __slots__ = ['_data']
 
-    def __init__(self,name):
-        self._name = name
+    def __init__(self,data):
+        self._data = data
 
     @property
-    def name(self):
-        return self._name
+    def data(self):
+        return self._data
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{}'.format(self.data)
 
     def __repr__(self):
-        return 'Vertex({})'.format(self.name)
+        return 'Vertex({})'.format(self.data)
 
 class Edge(object):
     """
@@ -117,8 +117,8 @@ class Digraph(object):
         for _ in range(n):
             aMatrix.append([0]*n)
         for e in self.elist:
-            i = e.v1.name
-            j = e.v2.name
+            i = e.v1.data
+            j = e.v2.data
             aMatrix[i-1][j-1] += 1
         return aMatrix
 
@@ -164,7 +164,7 @@ class Digraph(object):
         isn't a gap.
         """
         g = self.aMatrix()
-        j = v.name
+        j = v.data
         del g[j]
         for i in range(len(g)):
             del g[i][j]
@@ -206,8 +206,8 @@ class Graph(Digraph):
         for _ in range(n):
             dMatrix.append([0]*n)
         for e in self.elist:
-            dMatrix[e.v1.name-1][e.v1.name-1] += 0.5
-            dMatrix[e.v2.name-1][e.v2.name-1] += 0.5
+            dMatrix[e.v1.data-1][e.v1.data-1] += 0.5
+            dMatrix[e.v2.data-1][e.v2.data-1] += 0.5
         for i in range(n):
             for j in range(n):
                 dMatrix[i][j] = int(dMatrix[i][j])
