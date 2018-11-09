@@ -1,26 +1,9 @@
 # (c) 2018 William Johnson
 """Implementation of a data structure to hold a directed graph"""
 
-def aMatrixToGraph(aM):
-    """
-    Function that takes an adjancecy matrix and converts it to a graph.
-    >>> aMatrixToGraph([[0]])
-    Graph([Vertex(1)],[])
-    >>> aMatrixToGraph([[0,1],[1,0]])
-    Graph([Vertex(1), Vertex(2)],[Edge(Vertex(1),Vertex(2),1), Edge(Vertex(2),Vertex(1),1)])
-    """
-    v = []
-    e = []
-    n = len(aM)
-    a = [l.copy() for l in aM]
-    for i in range(n):
-        v.append(Vertex(i+1))
-    for i in range(n):
-        for j in range(n):
-            while a[i][j] >= 1:
-                e.append(Edge(Vertex(i+1),Vertex(j+1),1))
-                a[i][j] -= 1
-    return Graph(v,e)
+from helper import *
+
+__all__ = ['Vertex','Edge','Digraph','Graph']
         
 class Vertex(object):
     """
@@ -218,11 +201,14 @@ class Graph(Digraph):
         Returns the laplacian matrix of a graph. That is the degree matrix
         minus the adjacency matrix.
         """
+        n = len(self.vlist)
         lMatrix = []
         dMatrix = self.dMatrix()
         aMatrix = self.aMatrix()
-        for i in range(len(self.vlist)):
-            for j in range(len(self.vlist)):
+        for _ in range(n):
+            lMatrix.append([0]*n)
+        for i in range(n):
+            for j in range(n):
                 lMatrix[i][j] = dMatrix[i][j]-aMatrix[i][j]
         return lMatrix
 
@@ -232,18 +218,6 @@ class Graph(Digraph):
     def __repr__(self):
         return 'Graph({!r},{!r})'.format(self.vlist,self.elist)
 
-class CompleteGraph(Graph):
-    def __init__(self,n):
-        vlist = []
-        elist = []
-        for v in range(n):
-            vlist.append(Vertex(v+1))
-        for i in range(n):
-            for j in range(i):
-                elist.append(Edge(Vertex(i),Vertex(j)))
-                elist.append(Edge(Vertex(j),Vertex(i)))
-        self._vlist = vlist
-        self._elist = elist
 
 if __name__ == '__main__':
     from doctest import testmod
